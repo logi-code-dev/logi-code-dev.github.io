@@ -1,13 +1,33 @@
 :root {
-    color-scheme: light;
-    --ink: #192421;
-    --muted: #64716b;
-    --paper: #f6f7f2;
-    --line: #d9ded5;
+    color-scheme: light dark;
+    --ink: light-dark(#192421, #e6eee8);
+    --muted: light-dark(#64716b, #a3b2aa);
+    --paper: light-dark(#f6f7f2, #141b18);
+    --line: light-dark(#d9ded5, #35423b);
     --lime: #d5fa52;
-    --teal: #126b61;
+    --lime-hover: light-dark(#c3eb35, #c3eb35);
+    --teal: light-dark(#126b61, #72cfc0);
+    --art-background: light-dark(#e9eee4, #202c27);
+    --art-grid: light-dark(rgba(25, 36, 33, 0.06), rgba(230, 238, 232, 0.07));
+    --orbit-line: light-dark(rgba(18, 107, 97, 0.38), rgba(114, 207, 192, 0.45));
+    --brand-mark-background: light-dark(#192421, #e6eee8);
+    --brand-mark-foreground: light-dark(#f6f7f2, #141b18);
+    --switch-track: light-dark(#d9ded5, #35423b);
+    --contact-background: light-dark(#192421, #0d1311);
+    --contact-text: light-dark(#f6f7f2, #e6eee8);
+    --contact-muted: light-dark(#d1d9d3, #bdc9c1);
+    --contact-subtle: light-dark(#b8c5bd, #a3b2aa);
+    --contact-rule: light-dark(#75837a, #59685f);
     --mono: "DM Mono", "SFMono-Regular", Consolas, monospace;
     --sans: "Space Grotesk", "Avenir Next", sans-serif;
+}
+
+:root[data-theme="light"] {
+    color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
 }
 
 * {
@@ -58,8 +78,8 @@ a {
     height: 30px;
     place-items: center;
     border-radius: 50%;
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--brand-mark-background);
+    color: var(--brand-mark-foreground);
     font-size: 16px;
 }
 
@@ -73,6 +93,50 @@ a {
     gap: 32px;
     font-size: 13px;
     font-weight: 600;
+}
+
+.theme-toggle {
+    position: relative;
+    width: 64px;
+    height: 36px;
+    padding: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 0;
+    border-radius: 999px;
+    background: var(--switch-track);
+    color: var(--muted);
+    cursor: pointer;
+}
+
+.theme-toggle-icon {
+    z-index: 1;
+    width: 26px;
+    font-size: 17px;
+    line-height: 1;
+    text-align: center;
+}
+
+.theme-toggle-thumb {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--paper);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+    transition: transform 160ms ease;
+}
+
+.theme-toggle[aria-checked="true"] .theme-toggle-thumb {
+    transform: translateX(28px);
+}
+
+.theme-toggle[aria-checked="false"] .theme-toggle-sun,
+.theme-toggle[aria-checked="true"] .theme-toggle-moon {
+    color: var(--ink);
 }
 
 .nav-contact span {
@@ -152,7 +216,7 @@ h1 span {
 }
 
 .primary-link:hover {
-    background: #c3eb35;
+    background: var(--lime-hover);
     transform: translateY(-2px);
 }
 
@@ -164,9 +228,9 @@ h1 span {
     position: relative;
     min-height: 345px;
     overflow: hidden;
-    background-color: #e9eee4;
-    background-image: linear-gradient(rgba(25, 36, 33, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(25, 36, 33, 0.06) 1px, transparent 1px);
+    background-color: var(--art-background);
+    background-image: linear-gradient(var(--art-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--art-grid) 1px, transparent 1px);
     background-size: 28px 28px;
 }
 
@@ -187,7 +251,7 @@ h1 span {
     position: absolute;
     top: 50%;
     left: 50%;
-    border: 1px solid rgba(18, 107, 97, 0.38);
+    border: 1px solid var(--orbit-line);
     border-radius: 50%;
     transform: translate(-50%, -50%) rotate(-29deg);
 }
@@ -365,12 +429,12 @@ h2 {
 
 .contact-section {
     padding: 68px 7.2% 76px;
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--contact-background);
+    color: var(--contact-text);
 }
 
 .contact-section>.eyebrow {
-    color: #b8c5bd;
+    color: var(--contact-subtle);
 }
 
 .contact-content {
@@ -394,15 +458,15 @@ h2 {
 
 .contact-aside p {
     margin-bottom: 18px;
-    color: #d1d9d3;
+    color: var(--contact-muted);
     font-size: 14px;
     line-height: 1.6;
 }
 
 .contact-placeholder {
     padding-bottom: 5px;
-    border-bottom: 1px solid #75837a;
-    color: #b8c5bd;
+    border-bottom: 1px solid var(--contact-rule);
+    color: var(--contact-subtle);
     font-family: var(--mono);
     font-size: 10px;
 }
@@ -429,6 +493,11 @@ h2 {
 a:focus-visible {
     outline: 2px solid var(--teal);
     outline-offset: 4px;
+}
+
+button:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
 }
 
 @media (max-width: 760px) {
@@ -487,7 +556,7 @@ a:focus-visible {
     }
 
     .site-header nav {
-        gap: 15px;
+        gap: 8px;
         font-size: 11px;
     }
 

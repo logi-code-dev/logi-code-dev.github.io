@@ -3,11 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
     <meta
       name="description"
       content="LogiCode is the portfolio of a senior software engineer focused on Android and Kotlin Multiplatform."
     />
     <title>LogiCode | Android &amp; Kotlin Multiplatform Engineering</title>
+    <script>
+      try {
+        const savedTheme = localStorage.getItem("logicode-theme");
+        if (savedTheme === "light" || savedTheme === "dark") {
+          document.documentElement.dataset.theme = savedTheme;
+        }
+      } catch {}
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -27,6 +36,23 @@
         <a class="nav-contact" href="#contact"
           >Get in touch <span aria-hidden="true">↗</span></a
         >
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          role="switch"
+          aria-label="Dark mode"
+          aria-checked="false"
+          title="Switch to dark mode"
+        >
+          <span class="theme-toggle-icon theme-toggle-sun" aria-hidden="true"
+            >☼</span
+          >
+          <span class="theme-toggle-thumb" aria-hidden="true"></span>
+          <span class="theme-toggle-icon theme-toggle-moon" aria-hidden="true"
+            >☾</span
+          >
+        </button>
       </nav>
     </header>
 
@@ -135,5 +161,6 @@
       <span>ANDROID · KOTLIN MULTIPLATFORM</span>
       <span>© 2026 LOGICODE</span>
     </footer>
+    <script src="theme.js" defer></script>
   </body>
 </html>
